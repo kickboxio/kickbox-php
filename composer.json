@@ -1,0 +1,27 @@
+{
+	"name": "kickbox/kickbox",
+	"version": "0.0.1",
+	"description": "Official kickbox API library client for PHP",
+	"homepage": "https://kickbox.io",
+	"authors": [
+		{
+			"name": "Chaitanya Surapaneni",
+			"email": "chaitanya.surapaneni@kickbox.io",
+			"homepage": "https://github.com/kickboxio"
+		}
+	],
+	"keywords": ["email", "validation", "kickbox"],
+	"autoload": {
+		"psr-0": {
+			"kickbox\\": "lib/"
+		}
+	},
+	"require": {
+		"ext-json": "*",
+		"guzzle/guzzle": "3.7.*"
+	},
+	"support": {
+		"issues": "https://github.com/kickbox/kickbox-php/issues"
+	},
+	"license": "MIT"
+}
