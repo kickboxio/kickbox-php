@@ -21,7 +21,7 @@
 		"guzzle/guzzle": "3.7.*"
 	},
 	"support": {
-		"issues": "https://github.com/kickbox/kickbox-php/issues"
+		"issues": "https://github.com/kickboxio/kickbox-php/issues"
 	},
 	"license": "MIT"
 }
