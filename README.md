@@ -50,6 +50,7 @@ Works with [ 5.4 / 5.5 ]
 require_once 'vendor/autoload.php';
 
 $client   = new Kickbox\Client('Your_API_Key_Here');
+$kickbox  = $client->kickbox();
 $response = $kickbox->verify("test@example.com");
 ```
 
