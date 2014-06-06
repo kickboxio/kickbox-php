@@ -18,7 +18,7 @@ use Kickbox\HttpClient\ResponseHandler;
 class HttpClient
 {
     protected $options = array(
-        'base'    => 'https://kickbox.io',
+        'base'    => 'https://api.kickbox.io',
         'api_version' => 'v1',
         'user_agent' => 'alpaca/0.2.1 (https://github.com/pksunkara/alpaca)'
     );
