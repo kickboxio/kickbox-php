@@ -1,8 +1,8 @@
 {
 	"name": "kickbox/kickbox",
-	"version": "1.0.0",
+	"version": "1.0.3",
 	"description": "Official kickbox API library client for PHP",
-	"homepage": "https://kickbox.io",
+	"homepage": "http://kickbox.io",
 	"authors": [
 		{
 			"name": "Chaitanya Surapaneni",
@@ -10,7 +10,7 @@
 			"homepage": "https://github.com/kickboxio"
 		}
 	],
-	"keywords": ["email", "validation", "kickbox"],
+  "keywords": ["free", "email", "validation", "kickbox", "service", "verification", "sendex"],
 	"autoload": {
 		"psr-0": {
 			"kickbox\\": "lib/"
