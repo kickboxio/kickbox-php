@@ -13,7 +13,7 @@
   "keywords": ["free", "email", "validation", "kickbox", "service", "verification", "sendex"],
 	"autoload": {
 		"psr-0": {
-			"kickbox\\": "lib/"
+			"Kickbox\\": "lib/"
 		}
 	},
 	"require": {
