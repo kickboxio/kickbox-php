@@ -28,7 +28,7 @@ class Kickbox
     {
         $body = (isset($options['query']) ? $options['query'] : array());
 
-        $response = $this->client->get('/verify?email='.rawurlencode(email).'', $body, $options);
+        $response = $this->client->get('/verify?email='.rawurlencode($email).'', $body, $options);
 
         return $response;
     }
