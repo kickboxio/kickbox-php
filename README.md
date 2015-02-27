@@ -51,7 +51,13 @@ require_once 'vendor/autoload.php';
 
 $client   = new Kickbox\Client('Your_API_Key_Here');
 $kickbox  = $client->kickbox();
-$response = $kickbox->verify("test@example.com");
+
+try {
+  $response = $kickbox->verify("test@example.com");
+}
+catch (Exception $e) {
+  echo "Code: " . $e->getCode() . " Message: " . $e->getMessage();
+}
 ```
 
 ### Response information
