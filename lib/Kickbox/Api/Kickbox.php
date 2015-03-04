@@ -5,7 +5,7 @@ namespace Kickbox\Api;
 use Kickbox\HttpClient\HttpClient;
 
 /**
- * 
+ *
  */
 class Kickbox
 {
@@ -20,7 +20,7 @@ class Kickbox
     /**
      * Email Verification
      *
-     * '/verify?email=:email' GET
+     * '/verify?email=:email&timeout=:timeout' GET
      *
      * @param $email Email address to verify
      */
@@ -28,7 +28,9 @@ class Kickbox
     {
         $body = (isset($options['query']) ? $options['query'] : array());
 
-        $response = $this->client->get('/verify?email='.rawurlencode($email).'', $body, $options);
+        $timeout = (isset($options['timeout']) ? $options['timeout'] : 6000);
+
+        $response = $this->client->get('/verify?email='.rawurlencode($email).'&timeout='.$timeout.'', $body, $options);
 
         return $response;
     }

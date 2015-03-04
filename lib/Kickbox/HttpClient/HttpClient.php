@@ -19,8 +19,8 @@ class HttpClient
 {
     protected $options = array(
         'base'    => 'https://api.kickbox.io',
-        'api_version' => 'v1',
-        'user_agent' => 'alpaca/0.2.1 (https://github.com/pksunkara/alpaca)'
+        'api_version' => 'v2',
+        'user_agent' => 'kickbox-php/2.0.0 (https://github.com/kickboxio/kickbox-php)'
     );
 
     protected $headers = array();
