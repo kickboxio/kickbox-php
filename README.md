@@ -59,6 +59,14 @@ catch (Exception $e) {
   echo "Code: " . $e->getCode() . " Message: " . $e->getMessage();
 }
 ```
+#### Options
+
+**timeout** `integer` (optional) - Maximum time, in milliseconds, for the API to complete a verification request. Default: 6000.
+
+```php
+// Example with options
+$response = $kickbox->verify("test@example.com", array('timeout' => 6000));
+```
 
 ### Response information
 
