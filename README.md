@@ -99,12 +99,10 @@ A successful API call responds with the following values:
 An example response would look like:
 
 ```php
-
 $response = $kickbox->verify('test@example.com');
-
 var_dump($response);
 
-//Below is an example of what the var_dump($response) looks like
+//Below is an example of what the var_dump($response) looks like:
 
 class Kickbox\HttpClient\Response#29 (3) {
   public $body =>
