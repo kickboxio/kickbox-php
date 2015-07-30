@@ -9,6 +9,10 @@ use Guzzle\Http\Message\Response as GuzzleResponse;
  */
 class ResponseHandler {
 
+    /**
+     * @param GuzzleResponse $response
+     * @return \Guzzle\Http\EntityBodyInterface|string
+     */
     public static function getBody(GuzzleResponse $response)
     {
         $body = $response->getBody(true);

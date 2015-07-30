@@ -9,6 +9,12 @@ use Guzzle\Http\Message\RequestInterface;
  */
 class RequestHandler {
 
+    /**
+     * @param RequestInterface $request
+     * @param \Guzzle\Http\EntityBodyInterface|string $body
+     * @param array $options
+     * @return mixed
+     */
     public static function setBody(RequestInterface $request, $body, $options)
     {
         $type = isset($options['request_type']) ? $options['request_type'] : 'raw';
