@@ -96,6 +96,101 @@ A successful API call responds with the following values:
 * **domain** `string` - The domain of the provided email address. (`bob@example.com` -> `example.com`)
 * **success** `true | false` - *true* if the API request was successful (i.e., no authentication or unexpected errors occurred)
 
+An example response would look like:
+
+```php
+
+$response = $kickbox->verify('test@example.com');
+
+var_dump($response);
+
+//Below is an example of what the var_dump($response) looks like
+
+class Kickbox\HttpClient\Response#29 (3) {
+  public $body =>
+  array(13) {
+    'result' =>
+    string(11) "deliverable"
+    'reason' =>
+    string(14) "accepted_email"
+    'role' =>
+    bool(false)
+    'free' =>
+    bool(true)
+    'disposable' =>
+    bool(false)
+    'accept_all' =>
+    bool(false)
+    'did_you_mean' =>
+    NULL
+    'sendex' =>
+    int(1)
+    'email' =>
+    string(20) "test@example.com"
+    'user' =>
+    string(9) "test"
+    'domain' =>
+    string(10) "example.com"
+    'success' =>
+    bool(true)
+    'message' =>
+    NULL
+  }
+  public $code =>
+  int(200)
+  public $headers =>
+  class Guzzle\Http\Message\Header\HeaderCollection#40 (1) {
+    protected $headers =>
+    array(11) {
+      'server' =>
+      class Guzzle\Http\Message\Header#41 (3) {
+        ...
+      }
+      'date' =>
+      class Guzzle\Http\Message\Header#42 (3) {
+        ...
+      }
+      'content-type' =>
+      class Guzzle\Http\Message\Header#43 (3) {
+        ...
+      }
+      'content-length' =>
+      class Guzzle\Http\Message\Header#44 (3) {
+        ...
+      }
+      'connection' =>
+      class Guzzle\Http\Message\Header#45 (3) {
+        ...
+      }
+      'cache-control' =>
+      class Guzzle\Http\Message\Header\CacheControl#46 (4) {
+        ...
+      }
+      'pragma' =>
+      class Guzzle\Http\Message\Header#47 (3) {
+        ...
+      }
+      'expires' =>
+      class Guzzle\Http\Message\Header#48 (3) {
+        ...
+      }
+      'x-kickbox-balance' =>
+      class Guzzle\Http\Message\Header#49 (3) {
+        ...
+      }
+      'set-cookie' =>
+      class Guzzle\Http\Message\Header#50 (3) {
+        ...
+      }
+      'x-kickbox-response-time' =>
+      class Guzzle\Http\Message\Header#51 (3) {
+        ...
+      }
+    }
+  }
+}
+```
+
 ### Response headers
 
 Along with each response, the following HTTP headers are included:
