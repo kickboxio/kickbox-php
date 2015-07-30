@@ -11,7 +11,7 @@ class ResponseHandler {
 
     /**
      * @param GuzzleResponse $response
-     * @return \Guzzle\Http\EntityBodyInterface|string
+     * @return array|\Guzzle\Http\EntityBodyInterface|string
      */
     public static function getBody(GuzzleResponse $response)
     {

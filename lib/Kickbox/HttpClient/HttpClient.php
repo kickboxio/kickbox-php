@@ -186,7 +186,7 @@ class HttpClient
      * Get response body in correct format
      *
      * @param \Guzzle\Http\Message\Response $response
-     * @return \Guzzle\Http\EntityBodyInterface|string
+     * @return array|\Guzzle\Http\EntityBodyInterface|string
      */
     public function getBody($response)
     {

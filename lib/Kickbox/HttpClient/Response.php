@@ -8,7 +8,7 @@ namespace Kickbox\HttpClient;
 class Response
 {
     /**
-     * @var string|\Guzzle\Http\EntityBodyInterface
+     * @var array
      */
     public $body;
 
@@ -23,7 +23,7 @@ class Response
     public $headers;
 
     /**
-     * @param string|\Guzzle\Http\EntityBodyInterface $body
+     * @param array|string|\Guzzle\Http\EntityBodyInterface $body
      * @param int $code
      * @param array|\Guzzle\Http\Message\Header\HeaderCollection $headers
      */
