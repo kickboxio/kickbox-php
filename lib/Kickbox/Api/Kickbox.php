@@ -29,6 +29,7 @@ class Kickbox
      * '/verify?email=:email&timeout=:timeout' GET
      *
      * @param string $email Email address to verify
+     * @param array $options
      * @return \Kickbox\HttpClient\Response
      */
     public function verify($email, array $options = array())
