@@ -4,9 +4,6 @@ namespace Kickbox\Api;
 
 use Kickbox\HttpClient\HttpClient;
 
-/**
- *
- */
 class Kickbox
 {
 
