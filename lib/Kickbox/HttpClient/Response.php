@@ -7,7 +7,27 @@ namespace Kickbox\HttpClient;
  */
 class Response
 {
-    function __construct($body, $code, $headers) {
+    /**
+     * @var array
+     */
+    public $body;
+
+    /**
+     * @var int
+     */
+    public $code;
+
+    /**
+     * @var array|\Guzzle\Http\Message\Header\HeaderCollection
+     */
+    public $headers;
+
+    /**
+     * @param array|string|\Guzzle\Http\EntityBodyInterface $body
+     * @param int $code
+     * @param array|\Guzzle\Http\Message\Header\HeaderCollection $headers
+     */
+    public function __construct($body, $code, $headers) {
         $this->body = $body;
         $this->code = $code;
         $this->headers = $headers;

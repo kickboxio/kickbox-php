@@ -9,10 +9,16 @@ use Guzzle\Common\Event;
  */
 class AuthHandler
 {
+    /**
+     * @var array
+     */
     private $auth;
 
     const HTTP_HEADER = 1;
 
+    /**
+     * @param array $auth
+     */
     public function __construct(array $auth = array())
     {
         $this->auth = $auth;
@@ -31,6 +37,10 @@ class AuthHandler
         return -1;
     }
 
+    /**
+     * @param Event $event
+     * @throws \ErrorException
+     */
     public function onRequestBeforeSend(Event $event)
     {
         if (empty($this->auth)) {
@@ -52,6 +62,8 @@ class AuthHandler
 
     /**
      * Authorization with HTTP header
+     *
+     * @param Event $event
      */
     public function httpHeader(Event $event)
     {

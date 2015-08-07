@@ -3,18 +3,21 @@
 namespace Kickbox\HttpClient;
 
 use Guzzle\Common\Event;
-use Guzzle\Http\Message\Response;
 
-use Kickbox\HttpClient\ResponseHandler;
 use Kickbox\Exception\ClientException;
 
 /**
- * ErrorHanlder takes care of selecting the error message from response body
+ * ErrorHandler takes care of selecting the error message from response body
  */
 class ErrorHandler
 {
+    /**
+     * @param Event $event
+     * @throws ClientException
+     */
     public function onRequestError(Event $event)
     {
+        /** @var \Guzzle\Http\Message\Request $request */
         $request = $event['request'];
         $response = $request->getResponse();
 

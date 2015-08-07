@@ -4,14 +4,17 @@ namespace Kickbox\Api;
 
 use Kickbox\HttpClient\HttpClient;
 
-/**
- *
- */
 class Kickbox
 {
 
+    /**
+     * @var HttpClient
+     */
     private $client;
 
+    /**
+     * @param HttpClient $client
+     */
     public function __construct(HttpClient $client)
     {
         $this->client = $client;
@@ -22,7 +25,9 @@ class Kickbox
      *
      * '/verify?email=:email&timeout=:timeout' GET
      *
-     * @param $email Email address to verify
+     * @param string $email Email address to verify
+     * @param array $options
+     * @return \Kickbox\HttpClient\Response
      */
     public function verify($email, array $options = array())
     {

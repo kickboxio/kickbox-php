@@ -3,14 +3,7 @@
 namespace Kickbox\HttpClient;
 
 use Guzzle\Http\Client as GuzzleClient;
-use Guzzle\Http\ClientInterface;
 use Guzzle\Http\Message\RequestInterface;
-
-use Kickbox\HttpClient\AuthHandler;
-use Kickbox\HttpClient\ErrorHandler;
-use Kickbox\HttpClient\RequestHandler;
-use Kickbox\HttpClient\Response;
-use Kickbox\HttpClient\ResponseHandler;
 
 /**
  * Main HttpClient which is used by Api classes
@@ -25,6 +18,10 @@ class HttpClient
 
     protected $headers = array();
 
+    /**
+     * @param array $auth
+     * @param array $options
+     */
     public function __construct($auth = array(), array $options = array())
     {
 
@@ -55,26 +52,61 @@ class HttpClient
         }
     }
 
+    /**
+     * @param string $path
+     * @param array $params
+     * @param array $options
+     * @return \Kickbox\HttpClient\Response
+     * @throws \ErrorException
+     */
     public function get($path, array $params = array(), array $options = array())
     {
         return $this->request($path, null, 'GET', array_merge($options, array('query' => $params)));
     }
 
+    /**
+     * @param string $path
+     * @param \Guzzle\Http\EntityBodyInterface|string $body
+     * @param array $options
+     * @return \Kickbox\HttpClient\Response
+     * @throws \ErrorException
+     */
     public function post($path, $body, array $options = array())
     {
         return $this->request($path, $body, 'POST', $options);
     }
 
+    /**
+     * @param string $path
+     * @param \Guzzle\Http\EntityBodyInterface|string $body
+     * @param array $options
+     * @return \Kickbox\HttpClient\Response
+     * @throws \ErrorException
+     */
     public function patch($path, $body, array $options = array())
     {
         return $this->request($path, $body, 'PATCH', $options);
     }
 
+    /**
+     * @param string $path
+     * @param \Guzzle\Http\EntityBodyInterface|string $body
+     * @param array $options
+     * @return \Kickbox\HttpClient\Response
+     * @throws \ErrorException
+     */
     public function delete($path, $body, array $options = array())
     {
         return $this->request($path, $body, 'DELETE', $options);
     }
 
+    /**
+     * @param string $path
+     * @param \Guzzle\Http\EntityBodyInterface|string $body
+     * @param array $options
+     * @return \Kickbox\HttpClient\Response
+     * @throws \ErrorException
+     */
     public function put($path, $body, array $options = array())
     {
         return $this->request($path, $body, 'PUT', $options);
@@ -86,6 +118,13 @@ class HttpClient
      * - Transforms the body of request into correct format
      * - Creates the requests with give parameters
      * - Returns response body after parsing it into correct format
+     *
+     * @param string $path
+     * @param \Guzzle\Http\EntityBodyInterface|string|null $body
+     * @param string $httpMethod
+     * @param array $options
+     * @return \Kickbox\HttpClient\Response
+     * @throws \ErrorException
      */
     public function request($path, $body = null, $httpMethod = 'GET', array $options = array())
     {
@@ -126,6 +165,13 @@ class HttpClient
      * Creating a request with the given arguments
      *
      * If api_version is set, appends it immediately after host
+     *
+     * @param string $httpMethod
+     * @param string $path
+     * @param \Guzzle\Http\EntityBodyInterface|string|null $body
+     * @param array $headers
+     * @param array $options
+     * @return RequestInterface
      */
     public function createRequest($httpMethod, $path, $body = null, array $headers = array(), array $options = array())
     {
@@ -138,6 +184,9 @@ class HttpClient
 
     /**
      * Get response body in correct format
+     *
+     * @param \Guzzle\Http\Message\Response $response
+     * @return array|\Guzzle\Http\EntityBodyInterface|string
      */
     public function getBody($response)
     {
@@ -146,6 +195,11 @@ class HttpClient
 
     /**
      * Set request body in correct format
+     *
+     * @param RequestInterface $request
+     * @param \Guzzle\Http\EntityBodyInterface|string $body
+     * @param array $options
+     * @return mixed
      */
     public function setBody(RequestInterface $request, $body, $options)
     {
