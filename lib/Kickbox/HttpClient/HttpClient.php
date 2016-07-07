@@ -22,12 +22,8 @@ class HttpClient
      * @param array $auth
      * @param array $options
      */
-    public function __construct($auth = array(), array $options = array())
+    public function __construct(array $options = array())
     {
-
-        if (gettype($auth) == 'string') {
-            $auth = array('http_header' => $auth);
-        }
 
         $this->options = array_merge($this->options, $options);
 
@@ -46,10 +42,6 @@ class HttpClient
         $listener = array(new ErrorHandler(), 'onRequestError');
         $this->client->getEventDispatcher()->addListener('request.error', $listener);
 
-        if (!empty($auth)) {
-            $listener = array(new AuthHandler($auth), 'onRequestBeforeSend');
-            $this->client->getEventDispatcher()->addListener('request.before_send', $listener);
-        }
     }
 
     /**
