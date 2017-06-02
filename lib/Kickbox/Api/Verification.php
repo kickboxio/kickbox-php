@@ -4,20 +4,23 @@ namespace Kickbox\Api;
 
 use Kickbox\HttpClient\HttpClient;
 
-class Kickbox
+class Verification
 {
 
     /**
      * @var HttpClient
      */
-    private $client;
+    private $httpClient;
+
+    private $api_key;
 
     /**
-     * @param HttpClient $client
+     * @param HttpClient $httpClient
      */
-    public function __construct(HttpClient $client)
+    public function __construct($api_key)
     {
-        $this->client = $client;
+        $this->api_key = $api_key;
+        $this->httpClient = new HttpClient();
     }
 
     /**
@@ -35,7 +38,11 @@ class Kickbox
 
         $timeout = (isset($options['timeout']) ? $options['timeout'] : 6000);
 
-        $response = $this->client->get('/verify?email='.rawurlencode($email).'&timeout='.$timeout.'', $body, $options);
+        $body['email'] = $email;
+        $body['timeout'] = $timeout;
+        $body['api_key'] = $this->api_key;
+
+        $response = $this->httpClient->get('/verify', $body, $options);
 
         return $response;
     }

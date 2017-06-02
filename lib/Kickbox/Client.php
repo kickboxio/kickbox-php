@@ -2,30 +2,22 @@
 
 namespace Kickbox;
 
-use Kickbox\HttpClient\HttpClient;
-
 class Client
 {
     /**
-     * @var HttpClient
+     * @return Api\Verification
      */
-    private $httpClient;
-
-    /**
-     * @param array $auth
-     * @param array $options
-     */
-    public function __construct($auth = array(), array $options = array())
+    public function Verification($api_key)
     {
-        $this->httpClient = new HttpClient($auth, $options);
+        return new Api\Verification($api_key);
     }
 
     /**
-     * @return Api\Kickbox
+     * @return Api\Authentication
      */
-    public function kickbox()
+    public function Authentication($api_key, $app_code)
     {
-        return new Api\Kickbox($this->httpClient);
+        return new Api\Authentication($api_key, $app_code);
     }
 
 }
