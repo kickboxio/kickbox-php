@@ -2,42 +2,33 @@
 
 namespace Kickbox\Api;
 
-use Kickbox\HttpClient\HttpClient;
+use Kickbox\HttpClient\HttpClientInterface;
 
-class Kickbox
+class Kickbox implements KickboxInterface
 {
-
     /**
-     * @var HttpClient
+     * @var HttpClientInterface
      */
     private $client;
 
     /**
-     * @param HttpClient $client
+     * @param HttpClientInterface $client
      */
-    public function __construct(HttpClient $client)
+    public function __construct(HttpClientInterface $client)
     {
         $this->client = $client;
     }
 
     /**
-     * Email Verification
-     *
-     * '/verify?email=:email&timeout=:timeout' GET
-     *
-     * @param string $email Email address to verify
-     * @param array $options
-     * @return \Kickbox\HttpClient\Response
+     * {@inheritdoc}
      */
-    public function verify($email, array $options = array())
+    public function verify($email, array $options = [])
     {
-        $body = (isset($options['query']) ? $options['query'] : array());
+        $body = isset($options['query']) ? $options['query'] : [];
+        $timeout = isset($options['timeout']) ? $options['timeout'] : 6000;
+        $body['email'] = rawurlencode($email);
+        $body['timeout'] = $timeout;
 
-        $timeout = (isset($options['timeout']) ? $options['timeout'] : 6000);
-
-        $response = $this->client->get('/verify?email='.rawurlencode($email).'&timeout='.$timeout.'', $body, $options);
-
-        return $response;
+        return $this->client->get('/v2/verify', $body, $options);
     }
-
 }

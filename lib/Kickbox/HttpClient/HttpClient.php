@@ -2,207 +2,118 @@
 
 namespace Kickbox\HttpClient;
 
-use Guzzle\Http\Client as GuzzleClient;
-use Guzzle\Http\Message\RequestInterface;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\BadResponseException;
 
 /**
- * Main HttpClient which is used by Api classes
+ * Class HttpClient
+ * @package Kickbox\HttpClient
  */
-class HttpClient
+class HttpClient implements HttpClientInterface
 {
-    protected $options = array(
-        'base'    => 'https://api.kickbox.io',
+    /**
+     * @var Client
+     */
+    private $client;
+
+    /**
+     * @var array
+     */
+    private static $options = [
+        'base_uri'    => 'https://api.kickbox.io',
         'api_version' => 'v2',
-        'user_agent' => 'kickbox-php/2.0.0 (https://github.com/kickboxio/kickbox-php)'
-    );
-
-    protected $headers = array();
+        'headers' => [
+            'user_agent' => 'kickbox-php/2.0.0 (https://github.com/kickboxio/kickbox-php)'
+        ]
+    ];
 
     /**
-     * @param array $auth
+     * @param string $auth
      * @param array $options
      */
-    public function __construct($auth = array(), array $options = array())
+    public function __construct($auth = '', array $options = [])
     {
+        $options = array_merge(self::$options, $options);
+//        $event['request']->setHeader('Authorization', sprintf('token %s', $this->auth['http_header']));
 
-        if (gettype($auth) == 'string') {
-            $auth = array('http_header' => $auth);
-        }
-
-        $this->options = array_merge($this->options, $options);
-
-        $this->headers = array(
-            'user-agent' => $this->options['user_agent'],
-        );
-
-        if (isset($this->options['headers'])) {
-            $this->headers = array_merge($this->headers, array_change_key_case($this->options['headers']));
-            unset($this->options['headers']);
-        }
-
-        $client = new GuzzleClient($this->options['base'], $this->options);
-        $this->client = $client;
-
-        $listener = array(new ErrorHandler(), 'onRequestError');
-        $this->client->getEventDispatcher()->addListener('request.error', $listener);
-
-        if (!empty($auth)) {
-            $listener = array(new AuthHandler($auth), 'onRequestBeforeSend');
-            $this->client->getEventDispatcher()->addListener('request.before_send', $listener);
-        }
+        $options['headers']['Authorization'] = sprintf('token %s', $auth);
+        $this->client = new Client($options);
     }
 
     /**
-     * @param string $path
-     * @param array $params
-     * @param array $options
-     * @return \Kickbox\HttpClient\Response
-     * @throws \ErrorException
+     * {@inheritdoc}
      */
-    public function get($path, array $params = array(), array $options = array())
+    public function get($path, array $params = [], array $options = [])
     {
-        return $this->request($path, null, 'GET', array_merge($options, array('query' => $params)));
+        return $this->request($path, [], 'GET', array_merge($options, ['query' => $params]));
     }
 
     /**
-     * @param string $path
-     * @param \Guzzle\Http\EntityBodyInterface|string $body
-     * @param array $options
-     * @return \Kickbox\HttpClient\Response
-     * @throws \ErrorException
+     * {@inheritdoc}
      */
-    public function post($path, $body, array $options = array())
+    public function post($path, $body, array $options = [])
     {
         return $this->request($path, $body, 'POST', $options);
     }
 
     /**
-     * @param string $path
-     * @param \Guzzle\Http\EntityBodyInterface|string $body
-     * @param array $options
-     * @return \Kickbox\HttpClient\Response
-     * @throws \ErrorException
+     * {@inheritdoc}
      */
-    public function patch($path, $body, array $options = array())
+    public function patch($path, $body, array $options = [])
     {
         return $this->request($path, $body, 'PATCH', $options);
     }
 
     /**
-     * @param string $path
-     * @param \Guzzle\Http\EntityBodyInterface|string $body
-     * @param array $options
-     * @return \Kickbox\HttpClient\Response
-     * @throws \ErrorException
+     * {@inheritdoc}
      */
-    public function delete($path, $body, array $options = array())
+    public function delete($path, $body, array $options = [])
     {
         return $this->request($path, $body, 'DELETE', $options);
     }
 
     /**
-     * @param string $path
-     * @param \Guzzle\Http\EntityBodyInterface|string $body
-     * @param array $options
-     * @return \Kickbox\HttpClient\Response
-     * @throws \ErrorException
+     * {@inheritdoc}
      */
-    public function put($path, $body, array $options = array())
+    public function put($path, $body, array $options = [])
     {
         return $this->request($path, $body, 'PUT', $options);
     }
 
     /**
-     * Intermediate function which does three main things
-     *
-     * - Transforms the body of request into correct format
-     * - Creates the requests with give parameters
-     * - Returns response body after parsing it into correct format
-     *
-     * @param string $path
-     * @param \Guzzle\Http\EntityBodyInterface|string|null $body
+     * @param $path
+     * @param array $body
      * @param string $httpMethod
      * @param array $options
-     * @return \Kickbox\HttpClient\Response
-     * @throws \ErrorException
+     * @return Response
+     * @throws \ErrorException|\RuntimeException
      */
-    public function request($path, $body = null, $httpMethod = 'GET', array $options = array())
+    private function request($path, array $body = [], $httpMethod = 'GET', array $options = [])
     {
-        $headers = array();
+        if (isset($options['body'])) {
+            $body = array_merge($options['body'], $body);
+        }
 
-        $options = array_merge($this->options, $options);
-
+        $headers = [];
         if (isset($options['headers'])) {
             $headers = $options['headers'];
             unset($options['headers']);
         }
 
-        $headers = array_merge($this->headers, array_change_key_case($headers));
-
-        unset($options['body']);
-
-        unset($options['base']);
-        unset($options['user_agent']);
-
-        $request = $this->createRequest($httpMethod, $path, null, $headers, $options);
-
-        if ($httpMethod != 'GET') {
-            $request = $this->setBody($request, $body, $options);
-        }
+        $options['body'] = json_encode($body);
+        $options['headers'] = array_merge($headers, self::$options['headers']);
+        $options = array_merge($options, self::$options);
 
         try {
-            $response = $this->client->send($request);
+            $response = $this->client->request($httpMethod, $path, $options);
+        } catch (BadResponseException $e) {
+            throw new \ErrorException($e->getMessage(), $e->getResponse()->getStatusCode());
         } catch (\LogicException $e) {
-            throw new \ErrorException($e->getMessage());
+            throw new \ErrorException($e->getMessage(), $e->getCode());
         } catch (\RuntimeException $e) {
-            throw new \RuntimeException($e->getMessage());
+            throw new \ErrorException($e->getMessage(), $e->getCode());
         }
 
-        return new Response($this->getBody($response), $response->getStatusCode(), $response->getHeaders());
-    }
-
-    /**
-     * Creating a request with the given arguments
-     *
-     * If api_version is set, appends it immediately after host
-     *
-     * @param string $httpMethod
-     * @param string $path
-     * @param \Guzzle\Http\EntityBodyInterface|string|null $body
-     * @param array $headers
-     * @param array $options
-     * @return RequestInterface
-     */
-    public function createRequest($httpMethod, $path, $body = null, array $headers = array(), array $options = array())
-    {
-        $version = (isset($options['api_version']) ? "/".$options['api_version'] : "");
-
-        $path    = $version.$path;
-
-        return $this->client->createRequest($httpMethod, $path, $headers, $body, $options);
-    }
-
-    /**
-     * Get response body in correct format
-     *
-     * @param \Guzzle\Http\Message\Response $response
-     * @return array|\Guzzle\Http\EntityBodyInterface|string
-     */
-    public function getBody($response)
-    {
-        return ResponseHandler::getBody($response);
-    }
-
-    /**
-     * Set request body in correct format
-     *
-     * @param RequestInterface $request
-     * @param \Guzzle\Http\EntityBodyInterface|string $body
-     * @param array $options
-     * @return mixed
-     */
-    public function setBody(RequestInterface $request, $body, $options)
-    {
-        return RequestHandler::setBody($request, $body, $options);
+        return new Response(json_decode($response->getBody()->getContents(), true), $response->getStatusCode());
     }
 }
