@@ -12,16 +12,16 @@ class Client
     private $httpClient;
 
     /**
-     * @param array $auth
+     * @param string $auth
      * @param array $options
      */
-    public function __construct($auth = array(), array $options = array())
+    public function __construct($auth = '', array $options = [])
     {
         $this->httpClient = new HttpClient($auth, $options);
     }
 
     /**
-     * @return Api\Kickbox
+     * {@inheritdoc}
      */
     public function kickbox()
     {

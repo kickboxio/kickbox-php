@@ -3,7 +3,7 @@
 namespace Kickbox\HttpClient;
 
 /*
- * Response object contains the response returned by the client
+ *
  */
 class Response
 {
@@ -18,16 +18,17 @@ class Response
     public $code;
 
     /**
-     * @var array|\Guzzle\Http\Message\Header\HeaderCollection
+     * @var array|null
      */
     public $headers;
 
     /**
      * @param array|string|\Guzzle\Http\EntityBodyInterface $body
      * @param int $code
-     * @param array|\Guzzle\Http\Message\Header\HeaderCollection $headers
+     * @param array|null
      */
-    public function __construct($body, $code, $headers) {
+    public function __construct($body, $code, $headers = null)
+    {
         $this->body = $body;
         $this->code = $code;
         $this->headers = $headers;

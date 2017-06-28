@@ -1,6 +1,6 @@
 {
 	"name": "kickbox/kickbox",
-	"version": "2.1.0",
+	"version": "2.2.0",
 	"description": "Official kickbox API library client for PHP",
 	"homepage": "http://kickbox.io",
 	"authors": [
@@ -18,7 +18,7 @@
 	},
 	"require": {
 		"ext-json": "*",
-		"guzzle/guzzle": "3.9.*"
+		"guzzlehttp/guzzle": "^6.0"
 	},
 	"support": {
 		"issues": "https://github.com/kickboxio/kickbox-php/issues"
