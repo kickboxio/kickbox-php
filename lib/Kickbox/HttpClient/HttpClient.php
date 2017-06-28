@@ -23,7 +23,7 @@ class HttpClient implements HttpClientInterface
         'base_uri'    => 'https://api.kickbox.io',
         'api_version' => 'v2',
         'headers' => [
-            'user_agent' => 'kickbox-php/2.0.0 (https://github.com/kickboxio/kickbox-php)'
+            'user_agent' => 'kickbox-php/2.2.0 (https://github.com/kickboxio/kickbox-php)'
         ]
     ];
 
@@ -34,7 +34,6 @@ class HttpClient implements HttpClientInterface
     public function __construct($auth = '', array $options = [])
     {
         $options = array_merge(self::$options, $options);
-//        $event['request']->setHeader('Authorization', sprintf('token %s', $this->auth['http_header']));
 
         $options['headers']['Authorization'] = sprintf('token %s', $auth);
         $this->client = new Client($options);
