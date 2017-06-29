@@ -27,5 +27,4 @@ class Client
     {
         return new Api\Kickbox($this->httpClient);
     }
-
 }
