@@ -1,27 +1,50 @@
 {
-	"name": "kickbox/kickbox",
-	"version": "2.2.1",
-	"description": "Official kickbox API library client for PHP",
-	"homepage": "http://kickbox.io",
-	"authors": [
-		{
-			"name": "Chaitanya Surapaneni",
-			"email": "chaitanya.surapaneni@kickbox.io",
-			"homepage": "https://github.com/kickboxio"
-		}
-	],
-  "keywords": ["free", "email", "validation", "kickbox", "service", "verification", "sendex"],
-	"autoload": {
-		"psr-0": {
-			"Kickbox\\": "lib/"
-		}
-	},
-	"require": {
-		"ext-json": "*",
-		"guzzlehttp/guzzle": "^6.0"
-	},
-	"support": {
-		"issues": "https://github.com/kickboxio/kickbox-php/issues"
-	},
-	"license": "MIT"
+    "name": "kickbox/kickbox",
+    "version": "2.2.1",
+    "description": "Official kickbox API library client for PHP",
+    "homepage": "http://kickbox.io",
+    "authors": [
+        {
+            "name": "Chaitanya Surapaneni",
+            "email": "chaitanya.surapaneni@kickbox.io",
+            "homepage": "https://github.com/kickboxio"
+        }
+    ],
+    "keywords": [
+        "free",
+        "email",
+        "validation",
+        "kickbox",
+        "service",
+        "verification",
+        "sendex"
+    ],
+    "autoload": {
+        "psr-0": {
+            "Kickbox\\": "lib/"
+        }
+    },
+    "autoload-dev": {
+        "psr-0": {
+            "kickbox\\Tests\\": "tests/"
+        }
+    },
+    "require": {
+        "ext-json": "*",
+        "guzzlehttp/guzzle": "^6.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^4.8 || ^5.4",
+        "friendsofphp/php-cs-fixer": "^2.3"
+    },
+    "support": {
+    	"email": "help@kickbox.io",
+        "docs": "https://docs.kickbox.io",
+        "issues": "https://github.com/kickboxio/kickbox-php/issues"
+    },
+    "scripts":{
+        "test": "./vendor/bin/phpunit",
+        "fix-style": "./vendor/bin/php-cs-fixer fix ."
+    },
+    "license": "MIT"
 }
