@@ -1,0 +1,12 @@
+language: php
+php:
+  - '5.6'
+  - '7.0'
+  - '7.1'
+install:
+  - composer install --no-interaction
+script:
+  - composer test
+env:
+  global:
+    secure: UitGS5iFLKaJ7CJZ3MJ4ddUWsDgyvPwwxQj9+yNkmm7y69yK4ar4eJSh+Hz5OShTuhII+cZKnOHox32D+C6LVHWd37T7VHUstOWgSeIw7uGoifUDNgKaoYkhhUF8V+i/+GxnNsPCRgK7Th4hgbVdwO896gO0pSWxpDlkl9NYWQpnI5Foiw6y2q2mnpualzbXbaZ99mO80kVPnxHC/Xy2U/g7Su+y5GjiTdlaTg4AlNL7L3mCcxb2W4MJX9ykt35LrO+0kal3X1HsP5alxaHNIBD8/vQI9TbpPzn9afJ+uwbrKZZJ3zAB938rzHMvHqXrxErKERNoEs/3I1Fo90znGsy/7sj/7yPLlbko+v8T/f4Gy0YRnFTye0kqNzCG4Ou++U5/Sm3QaVn1ctOszneZN2PqtRWC2ZYfX1Nz+4ieJfr9eSVEoWdZY00kWroKWvaZXZw6A/5FimooIE0vFnNT9pjHIqJto0fqLDpIRWBjeQzTmUzv73kYvZd+gp+Z6AWCO8LZOeVy5N5D+AiCvG+K8BvB0TwoRwRN1IogtMfmM8gUe71WQHouAqisQyOia5wZEMxRpoM3iEs8sbJ/nTo15Qs24QLVhHBndvylVDFdN6I+Z06xaBrzs+FnD+bHmPBtsZNeCx86Js1B2UX/4Vo8AgWFAouSIVcw72In8Vzl3FE=

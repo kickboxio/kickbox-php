@@ -9,9 +9,9 @@ class ClientException extends \ErrorException
 {
     public $code = null;
 
-    public function __construct($message, $code) {
+    public function __construct($message, $code)
+    {
         $this->code = $code;
         parent::__construct($message, $code);
     }
-
 }

@@ -5,6 +5,11 @@
 
 # Email Verification Library for PHP
 
+[![Travis CI](https://travis-ci.org/kickboxio/kickbox-php.svg?branch=master)](https://travis-ci.org/kickboxio/kickbox-php)
+[![Downloads](https://img.shields.io/packagist/dt/kickbox/kickbox.svg?maxAge=3600)](https://packagist.org/packages/kickbox/kickbox)
+[![Packagist](https://img.shields.io/packagist/v/kickbox/kickbox.svg?maxAge=3600)](https://packagist.org/packages/kickbox/kickbox)
+[![Slack Status](http://slack.kickbox.io/badge.svg)](http://slack.kickbox.io)
+
 Kickbox determines if an email address is not only valid, but associated with a actual user. Uses include:
 
 * Preventing users from creating accounts on your applications using fake, misspelled, or throw-away email addresses.
