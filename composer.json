@@ -1,6 +1,6 @@
 {
     "name": "kickbox/kickbox",
-    "version": "2.2.1",
+    "version": "2.2.2",
     "description": "Official kickbox API library client for PHP",
     "homepage": "http://kickbox.io",
     "authors": [
