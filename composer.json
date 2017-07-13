@@ -1,15 +1,13 @@
 {
     "name": "kickbox/kickbox",
-    "version": "2.2.2",
+    "version": "2.2.3",
     "description": "Official kickbox API library client for PHP",
     "homepage": "http://kickbox.io",
-    "authors": [
-        {
-            "name": "Chaitanya Surapaneni",
-            "email": "chaitanya.surapaneni@kickbox.io",
-            "homepage": "https://github.com/kickboxio"
-        }
-    ],
+    "authors": [{
+        "name": "Chaitanya Surapaneni",
+        "email": "chaitanya.surapaneni@kickbox.io",
+        "homepage": "https://github.com/kickboxio"
+    }],
     "keywords": [
         "free",
         "email",
@@ -38,11 +36,11 @@
         "friendsofphp/php-cs-fixer": "^2.3"
     },
     "support": {
-    	"email": "help@kickbox.io",
+        "email": "help@kickbox.io",
         "docs": "https://docs.kickbox.io",
         "issues": "https://github.com/kickboxio/kickbox-php/issues"
     },
-    "scripts":{
+    "scripts": {
         "test": "./vendor/bin/phpunit",
         "fix-style": "./vendor/bin/php-cs-fixer fix ."
     },
