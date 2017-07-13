@@ -99,9 +99,13 @@ class HttpClient implements HttpClientInterface
             unset($options['headers']);
         }
 
-        $options['body'] = json_encode($body);
+        if($httpMethod == 'PUT') {
+            $options['body'] = join("\n",$body);
+        } else {
+            $options['body'] = json_encode($body);
+        }
         $options['headers'] = array_merge($headers, self::$options['headers']);
-        $options = array_merge($options, self::$options);
+        $options = array_merge(self::$options, $options);
 
         try {
             $response = $this->client->request($httpMethod, $path, $options);
