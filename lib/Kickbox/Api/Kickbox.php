@@ -47,6 +47,7 @@ class Kickbox implements KickboxInterface
             'Content-Type' => 'text/csv',
             'X-Kickbox-Filename' => 'Batch API Process - '.date('m-d-Y-H-i-s')
         ], $options['headers']);
+        $emails = join("\n", $emails);
         return $this->client->put('/v2/verify-batch', $emails, $options);
     }
 

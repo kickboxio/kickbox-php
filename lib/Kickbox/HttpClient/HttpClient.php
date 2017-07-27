@@ -23,7 +23,7 @@ class HttpClient implements HttpClientInterface
         'base_uri'    => 'https://api.kickbox.io',
         'api_version' => 'v2',
         'headers' => [
-            'user-agent' => 'kickbox-php/2.2.2 (https://github.com/kickboxio/kickbox-php)'
+            'user-agent' => 'kickbox-php/2.2.3 (https://github.com/kickboxio/kickbox-php)'
         ]
     ];
 
@@ -81,29 +81,25 @@ class HttpClient implements HttpClientInterface
 
     /**
      * @param $path
-     * @param array $body
+     * @param $body
      * @param string $httpMethod
      * @param array $options
      * @return Response
      * @throws \ErrorException|\RuntimeException
      */
-    private function request($path, array $body = [], $httpMethod = 'GET', array $options = [])
+    private function request($path, $body, $httpMethod = 'GET', array $options = [])
     {
-        if (isset($options['body'])) {
-            $body = array_merge($options['body'], $body);
-        }
-
         $headers = [];
         if (isset($options['headers'])) {
             $headers = $options['headers'];
             unset($options['headers']);
         }
 
-        if($httpMethod == 'PUT') {
-            $options['body'] = join("\n",$body);
-        } else {
-            $options['body'] = json_encode($body);
-        }
+        unset($options['body']);
+
+        if(!empty($body))
+          $options['body'] = $body;
+
         $options['headers'] = array_merge($headers, self::$options['headers']);
         $options = array_merge(self::$options, $options);
 
