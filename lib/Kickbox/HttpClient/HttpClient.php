@@ -113,6 +113,6 @@ class HttpClient implements HttpClientInterface
             throw new \ErrorException($e->getMessage(), $e->getCode());
         }
 
-        return new Response(json_decode($response->getBody()->getContents(), true), $response->getStatusCode());
+        return new Response(json_decode($response->getBody()->getContents(), true), $response->getStatusCode(), $response->getHeaders());
     }
 }
