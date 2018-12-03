@@ -18,7 +18,7 @@ Kickbox determines if an email address is not only valid, but associated with a 
 
 ## Getting Started
 
-To begin, hop over to [kickbox.com](http://kickbox.com) and create a free account. Once you've signed up and logged in, click on **API Settings** and then click **Add API Key**. Take note of the generated API Key - you'll need it to setup the client as explained below.
+To begin, hop over to [kickbox.com](https://kickbox.com) and create a free account. Once you've signed up and logged in, click on **API Settings** and then click **Add API Key**. Take note of the generated API Key - you'll need it to setup the client as explained below.
 
 ## Installation
 
