@@ -20,7 +20,7 @@ class HttpClient implements HttpClientInterface
      * @var array
      */
     private static $options = [
-        'base_uri'    => 'https://api.kickbox.io',
+        'base_uri'    => 'https://api.kickbox.com',
         'api_version' => 'v2',
         'headers' => [
             'user-agent' => 'kickbox-php/2.2.5 (https://github.com/kickboxio/kickbox-php)'
