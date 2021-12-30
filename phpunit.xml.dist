@@ -1,17 +1,11 @@
 <phpunit
-		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/4.5/phpunit.xsd"
-		bootstrap="./vendor/autoload.php"
-		colors='always'
-		convertErrorsToExceptions='true'
-		convertNoticesToExceptions='true'
-		convertWarningsToExceptions='true'
-		stopOnError="true"
-		timeoutForLargeTests="60"
-		timeoutForMediumTests="10"
-		timeoutForSmallTests="1"
-		verbose="false" >
-	<php>
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="./vendor/phpunit/phpunit/phpunit.xsd"
+    bootstrap="./vendor/autoload.php"
+    colors="true"
+    stopOnError="true"
+>
+    <php>
         <env name="API_KEY" value=""/>
     </php>
     <testsuites>
