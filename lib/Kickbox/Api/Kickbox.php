@@ -40,7 +40,7 @@ class Kickbox implements KickboxInterface
      */
     public function verifyBatch($emails, array $options = [])
     {
-        if(empty($options['headers'])) {
+        if (empty($options['headers'])) {
             $options['headers'] = [];
         }
         $options['headers'] = array_merge([
@@ -57,7 +57,8 @@ class Kickbox implements KickboxInterface
      * @param array $options Options for GET request
      * @return \Kickbox\HttpClient\Response
      */
-    public function getBatchResults($id, array $options = []) {
+    public function getBatchResults($id, array $options = [])
+    {
         return $this->client->get('/v2/verify-batch/'.$id, [], $options);
     }
 
@@ -67,7 +68,8 @@ class Kickbox implements KickboxInterface
      * @param array $options Options for GET request
      * @return \Kickbox\HttpClient\Response
      */
-    public function isDisposable($email, array $options = []) {
+    public function isDisposable($email, array $options = [])
+    {
         $options = array_merge([
             'base_uri'    => 'https://open.kickbox.io',
             'api_version' => 'v1',
@@ -80,7 +82,8 @@ class Kickbox implements KickboxInterface
      * @param array $options Options for GET request
      * @return \Kickbox\HttpClient\Response
      */
-    public function getCreditBalance(array $options = []) {
+    public function getCreditBalance(array $options = [])
+    {
         return $this->client->get('/v2/balance', [], $options);
     }
 }

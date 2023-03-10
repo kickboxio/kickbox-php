@@ -9,19 +9,19 @@ class VerifyTest extends TestCase
 {
     protected $kickbox = null;
 
-    public function setup()
+    protected function setUp() : void
     {
         $api_key = getenv('API_KEY');
 
-        if (!$api_key) {
-            throw new \ErrorException('Invalid Api Key');
+        if (!$api_key || substr($api_key, 0, 5) !== 'test_') {
+            throw new \ErrorException('Invalid API key; use a sandbox API key only');
         }
 
         $client = new Client($api_key);
         $this->kickbox = $client->kickbox();
     }
 
-    public function testVerifiyDeliverable()
+    public function testVerifyDeliverable()
     {
         $response = $this->kickbox->verify('deliverable@kickbox.io');
         $body = $response->body;
@@ -33,7 +33,7 @@ class VerifyTest extends TestCase
         $this->assertFalse($body['free']);
         $this->assertFalse($body['disposable']);
         $this->assertFalse($body['accept_all']);
-        $this->assertInternalType('int', $body['sendex']);
+        $this->assertIsInt($body['sendex']);
         $this->assertEquals('deliverable@kickbox.io', $body['email']);
         $this->assertEquals('deliverable', $body['user']);
         $this->assertEquals('kickbox.io', $body['domain']);
@@ -52,7 +52,7 @@ class VerifyTest extends TestCase
         $this->assertFalse($body['free']);
         $this->assertFalse($body['disposable']);
         $this->assertFalse($body['accept_all']);
-        $this->assertInternalType('int', $body['sendex']);
+        $this->assertIsInt($body['sendex']);
         $this->assertEquals('rejected-email@kickbox.io', $body['email']);
         $this->assertEquals('rejected-email', $body['user']);
         $this->assertEquals('kickbox.io', $body['domain']);
@@ -71,7 +71,7 @@ class VerifyTest extends TestCase
         $this->assertFalse($body['free']);
         $this->assertFalse($body['disposable']);
         $this->assertFalse($body['accept_all']);
-        $this->assertInternalType('int', $body['sendex']);
+        $this->assertIsInt($body['sendex']);
         $this->assertEquals('invalid-domain@kickbox.io', $body['email']);
         $this->assertEquals('invalid-domain', $body['user']);
         $this->assertEquals('kickbox.io', $body['domain']);
@@ -90,7 +90,7 @@ class VerifyTest extends TestCase
         $this->assertFalse($body['free']);
         $this->assertFalse($body['disposable']);
         $this->assertFalse($body['accept_all']);
-        $this->assertInternalType('int', $body['sendex']);
+        $this->assertIsInt($body['sendex']);
         $this->assertEquals('invalid-email@kickbox.io', $body['email']);
         $this->assertEquals('invalid-email', $body['user']);
         $this->assertEquals('kickbox.io', $body['domain']);
@@ -109,7 +109,7 @@ class VerifyTest extends TestCase
         $this->assertFalse($body['free']);
         $this->assertFalse($body['disposable']);
         $this->assertFalse($body['accept_all']);
-        $this->assertInternalType('int', $body['sendex']);
+        $this->assertIsInt($body['sendex']);
         $this->assertEquals('invalid-smtp@kickbox.io', $body['email']);
         $this->assertEquals('invalid-smtp', $body['user']);
         $this->assertEquals('kickbox.io', $body['domain']);
@@ -128,7 +128,7 @@ class VerifyTest extends TestCase
         $this->assertTrue($body['free']);
         $this->assertFalse($body['disposable']);
         $this->assertFalse($body['accept_all']);
-        $this->assertInternalType('float', $body['sendex']);
+        $this->assertIsFloat($body['sendex']);
         $this->assertEquals('low-quality@kickbox.io', $body['email']);
         $this->assertEquals('low-quality', $body['user']);
         $this->assertEquals('kickbox.io', $body['domain']);
@@ -147,7 +147,7 @@ class VerifyTest extends TestCase
         $this->assertFalse($body['free']);
         $this->assertFalse($body['disposable']);
         $this->assertTrue($body['accept_all']);
-        $this->assertInternalType('float', $body['sendex']);
+        $this->assertIsFloat($body['sendex']);
         $this->assertEquals('accept-all@kickbox.io', $body['email']);
         $this->assertEquals('accept-all', $body['user']);
         $this->assertEquals('kickbox.io', $body['domain']);
@@ -166,7 +166,7 @@ class VerifyTest extends TestCase
         $this->assertFalse($body['free']);
         $this->assertFalse($body['disposable']);
         $this->assertFalse($body['accept_all']);
-        $this->assertInternalType('float', $body['sendex']);
+        $this->assertIsFloat($body['sendex']);
         $this->assertEquals('role@kickbox.io', $body['email']);
         $this->assertEquals('role', $body['user']);
         $this->assertEquals('kickbox.io', $body['domain']);
@@ -185,7 +185,7 @@ class VerifyTest extends TestCase
         $this->assertFalse($body['free']);
         $this->assertTrue($body['disposable']);
         $this->assertTrue($body['accept_all']);
-        $this->assertInternalType('int', $body['sendex']);
+        $this->assertIsInt($body['sendex']);
         $this->assertEquals('disposable@kickbox.io', $body['email']);
         $this->assertEquals('disposable', $body['user']);
         $this->assertEquals('kickbox.io', $body['domain']);
@@ -204,7 +204,7 @@ class VerifyTest extends TestCase
         $this->assertFalse($body['free']);
         $this->assertFalse($body['disposable']);
         $this->assertFalse($body['accept_all']);
-        $this->assertInternalType('int', $body['sendex']);
+        $this->assertIsInt($body['sendex']);
         $this->assertEquals('timeout@kickbox.io', $body['email']);
         $this->assertEquals('timeout', $body['user']);
         $this->assertEquals('kickbox.io', $body['domain']);
@@ -223,7 +223,7 @@ class VerifyTest extends TestCase
         $this->assertFalse($body['free']);
         $this->assertFalse($body['disposable']);
         $this->assertFalse($body['accept_all']);
-        $this->assertInternalType('int', $body['sendex']);
+        $this->assertIsInt($body['sendex']);
         $this->assertEquals('unexpected-error@kickbox.io', $body['email']);
         $this->assertEquals('unexpected-error', $body['user']);
         $this->assertEquals('kickbox.io', $body['domain']);
@@ -242,7 +242,7 @@ class VerifyTest extends TestCase
         $this->assertFalse($body['free']);
         $this->assertFalse($body['disposable']);
         $this->assertFalse($body['accept_all']);
-        $this->assertInternalType('int', $body['sendex']);
+        $this->assertIsInt($body['sendex']);
         $this->assertEquals('no-connect@kickbox.io', $body['email']);
         $this->assertEquals('no-connect', $body['user']);
         $this->assertEquals('kickbox.io', $body['domain']);
@@ -261,7 +261,7 @@ class VerifyTest extends TestCase
         $this->assertFalse($body['free']);
         $this->assertFalse($body['disposable']);
         $this->assertFalse($body['accept_all']);
-        $this->assertInternalType('int', $body['sendex']);
+        $this->assertIsInt($body['sendex']);
         $this->assertEquals('unavailable-smtp@kickbox.io', $body['email']);
         $this->assertEquals('unavailable-smtp', $body['user']);
         $this->assertEquals('kickbox.io', $body['domain']);
@@ -276,7 +276,7 @@ class VerifyTest extends TestCase
         $this->kickbox->verify('insufficient-balance@kickbox.io');
     }
 
-    public function tearDown()
+    protected function tearDown() : void
     {
         unset($this->kickbox);
     }

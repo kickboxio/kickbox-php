@@ -1,12 +1,16 @@
 {
     "name": "kickbox/kickbox",
-    "version": "2.2.6",
+    "version": "3.0.0",
     "description": "Official kickbox API library client for PHP",
     "homepage": "https://kickbox.com",
     "authors": [{
         "name": "Chaitanya Surapaneni",
         "email": "chaitanya.surapaneni@kickbox.com",
         "homepage": "https://github.com/kickboxio"
+    }, {
+        "name": "jon shusta",
+        "email": "jon@kickbox.com",
+        "homepage": "https://kickbox.com/"
     }],
     "keywords": [
         "free",
@@ -29,10 +33,10 @@
     },
     "require": {
         "ext-json": "*",
-        "guzzlehttp/guzzle": "^6.0"
+        "guzzlehttp/guzzle": "^7.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "^4.8 || ^5.4",
+        "phpunit/phpunit": "^8.5",
         "friendsofphp/php-cs-fixer": "^2.3"
     },
     "support": {

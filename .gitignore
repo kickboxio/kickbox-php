@@ -1,1 +1,6 @@
-vendor/
+/vendor/
+/composer.phar
+.env
+.idea
+.phpunit*
+.php_cs*

@@ -18,13 +18,15 @@ Kickbox determines if an email address is not only valid, but associated with a 
 
 ## Getting Started
 
-To begin, hop over to [kickbox.com](https://kickbox.com) and create a free account. Once you've signed up and logged in, click on **API Settings** and then click **Add API Key**. Take note of the generated API Key - you'll need it to setup the client as explained below.
+To begin, hop over to [app.kickbox.com](https://app.kickbox.com) and create a free account. Once you've signed up and logged in, click on **API Settings** and then click **Add API Key**. Copy the generated API Key. You'll need it to setup the client as explained below.
+
+You will need PHP 7.4 or higher, some PHP extensions (most notably curl, dom, mbstring if working with the unit tests) and composer.
+
+Support for PHP 7.4 is provided on a legacy branch. See https://www.php.net/supported-versions.php
 
 ## Installation
 
 Make sure you have [composer](https://getcomposer.org) installed.
-
-Add the following to your composer.json
 
 ```js
 {
@@ -41,10 +43,6 @@ $ php composer.phar update
 ```
 
 > This package follows the `PSR-0` convention names for its classes, which means you can easily integrate these classes loading in your own autoloader.
-
-#### Versions
-
-Works with [ 5.4 / 5.5 ]
 
 ## Usage
 
@@ -201,11 +199,26 @@ Along with each response, the following HTTP headers are included:
 * `X-Kickbox-Balance` - Your remaining verification credit balance (Daily + On Demand).
 * `X-Kickbox-Response-Time` - The elapsed time (in milliseconds) it took Kickbox to process the request.
 
+## Contributing
+
+Notify us via [app.kickbox.com](https://app.kickbox.com) if issues or PRs require prompt attention. Include a link!
+
+#### Testing
+
+Unit tests should be run using a sandbox key only. You can specify this on the command line:
+
+```bash
+$ API_KEY=test_feddaddeadbeef1123581321 composer test
+```
+
 ## License
+
 MIT
 
 ## Bug Reports
+
 Report [here](https://github.com/kickboxio/kickbox-php/issues).
 
 ## Need Help?
+
 help@kickbox.com

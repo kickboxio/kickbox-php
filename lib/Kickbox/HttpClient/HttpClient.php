@@ -23,7 +23,7 @@ class HttpClient implements HttpClientInterface
         'base_uri'    => 'https://api.kickbox.com',
         'api_version' => 'v2',
         'headers' => [
-            'user-agent' => 'kickbox-php/2.2.5 (https://github.com/kickboxio/kickbox-php)'
+            'user-agent' => 'kickbox-php/3.0.0 (https://github.com/kickboxio/kickbox-php)'
         ]
     ];
 
@@ -97,8 +97,9 @@ class HttpClient implements HttpClientInterface
 
         unset($options['body']);
 
-        if(!empty($body))
-          $options['body'] = $body;
+        if (!empty($body)) {
+            $options['body'] = $body;
+        }
 
         $options['headers'] = array_merge($headers, self::$options['headers']);
         $options = array_merge(self::$options, $options);
